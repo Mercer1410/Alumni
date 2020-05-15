@@ -21,7 +21,8 @@ var eventRoute = require("./routes/event");
 var commentRoute = require("./routes/comment");
 var achievementRoute = require("./routes/achievement");
 
-mongoose.connect("mongodb://localhost/alumni", {useNewUrlParser: true, useUnifiedTopology: true});
+var url = process.env.DATABASEURL || "mongodb://localhost/alumni";
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
