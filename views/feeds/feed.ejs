@@ -1,0 +1,104 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 mb-5">
+            <div class="sticky-top">
+                <h3 class="text-danger text-center userTitle"><img class="rounded-circle" src="<%= currentUser.avatar %>" alt="" style="height: 6vh; width: 6vh;">  Welcome <%= currentUser.username %></h3>
+                <h4 class="text-warning mt-5 text-center">Know where your collegues are</h4>
+                <div id="map"></div>
+                <h3 class="text-center text-warning mt-1">Our Family</h3>
+                <div class="jumbotron">
+                    <div class="member">
+                        <% users.forEach(function(us){ %>
+                            <ul>
+                                <li><a href="/users/<%= us._id %>"><%= us.firstName %> <%= us.lastName %></a></li>
+                            </ul>
+                        <% }); %>
+                    </div>
+                </div>
+            </div>     
+        </div>
+        <div class="col-md-7">
+            <% feed.reverse().forEach(function(feed){ %>
+                <div class="card">
+                    <img src="<%= feed.image %>" style="width: 100%; height: 60vh;" alt="Image">
+                    <div class="card-body">
+                        <h3 class="card-title text-primary"><%= feed.title %></h3>
+                        <h6>By - <%= feed.author.username %></h6>
+                        <h6 class="text-right"><%= moment(feed.createdAt).fromNow() %></h6>
+                        <p class="card-text"><%= feed.description %></p>
+                        <% if(currentUser && feed.author.id.equals(currentUser._id)){ %>
+                            <a href="/<%= feed._id %>/edit" class="btn btn-outline-warning btn-xs">Edit</a>
+                            <form class="d-inline" action="/<%= feed._id %>?_method=DELETE" method="post">
+                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                            </form>
+                        <% } %>
+                    </div>
+                    <div class="container">
+                        <div class="jumbotron">
+                            <div class="text-right">
+                                <a href="/<%= feed._id %>/comment/new" class="btn btn-sm btn-outline-secondary">Add a Comment</a>
+                            </div>
+                            <hr>
+                        <% feed.comment.reverse().forEach(function(comment){ %>
+                            <strong><%= comment.author.username %></strong>
+                            <span class="text-right"><em><small><%= moment(comment.createdAt).fromNow() %></small></em></span>
+                            <p><%= comment.text %></p>
+                            <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                                <a href="/<%= feed._id %>/comment/<%= comment._id %>/edit" class="btn btn-outline-warning btn-xs">Edit</a>
+                                <form class="d-inline" action="/<%= feed._id %>/comment/<%= comment._id %>?_method=DELETE" method="post">
+                                    <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                                </form>
+                            <% } %>
+                            <hr>
+                        <% }); %>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <hr style="margin-top: 10px; margin-bottom: 10px;">
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</div>
+
+<!-- MAP -->
+<script src="https://unpkg.com/es6-promise@4.2.4/dist/es6-promise.auto.min.js"></script>
+    <script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiYWRhcnNoYWdyd2FsIiwiYSI6ImNrN3BuN2FoNTA4bGEzaXFkcjJvYXQ0ZnAifQ.IaCVUsnZqH77-agcveZKEw';
+        var map = new mapboxgl.Map({
+                        container: 'map',
+                        style: 'mapbox://styles/mapbox/dark-v10',
+                        center: [75,25],
+                        zoom: 3
+                    });
+                    
+        map.addControl(new mapboxgl.NavigationControl());
+
+        var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
+                '<% users.forEach(function(us){ %>'
+                '<% var x = us.place %>'
+                    mapboxClient.geocoding.forwardGeocode({
+                        query: '<%=x%>',
+                        autocomplete: false,
+                        limit: 1
+                    }).send().then(function(response) {
+                        if (response && response.body && response.body.features && response.body.features.length) {
+                            var feature = response.body.features[0];
+                            var popup = new mapboxgl.Popup({offset: 25}).setHTML("<div><strong><%= us.firstName %> <%= us.lastName %></strong></div><div><strong>Currently At: <%= us.place %></strong></div>");
+                            let marker = new mapboxgl.Marker().setLngLat(feature.center);
+                            const element = marker.getElement();
+                            element.id = 'marker'
+                            element.addEventListener('mouseenter', () => popup.addTo(map));
+                            element.addEventListener('mouseleave', () => popup.remove());
+                            marker.setPopup(popup);
+                            marker.addTo(map);
+                        }
+                    });
+                '<% }); %>'
+    </script>
+
+<%- include("../partials/footer") %>

@@ -1,0 +1,41 @@
+<%- include("../partials/header") %>
+
+<h1 class="display-1 text-center text-success">Events</h1>
+
+<div class="container">
+    <h4 class="text-right"><a href="/users/<%= currentUser._id %>/events/new" class="btn btn-xs btn-outline-success">Add Event</a></h4>
+    <% events.forEach(function(event){ %>
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <img class="img-fluid" src="<%= event.Poster ? event.Poster : 'https://static.businessworld.in/article/article_extra_large_image/1566790917_Um2lHl_events.jpg' %>" alt="">
+                <h4 class="d-flex flex-row justify-content-center">
+                    <div class="text-success"><%= event.From ? event.From : 'Unknown' %><span class="text-warning">-</span> </div>
+                    <div class="text-danger"><%= event.Till ? event.Till : 'Unknown' %></div>
+                </h4>
+                <h4 class="text-center text-primary">Duration : <%= event.duration ? event.duration : " " %> day(s)</h4>
+            </div>
+            <div class="col-md-8">
+                <div class="jumbotron">
+                    <h1><%= event.title ? event.title : 'Event' %></h1>
+                    <h5 class="d-flex flex-row justify-content-between">
+                        <div>Event hosted by : <%= event.author.username %></div>
+                        <div><%= event.date ? event.date : 'No Date Has Been Specified' %></div>
+                    </h5>
+                    <p class="lead"><%= event.description ? event.description : 'No Information Has Been Provided' %></p>
+                    <h5 class="text-right"><a class="btn btn-sm btn-outline-secondary" href="<%= event.Link ? event.Link : '#' %>">Learn more</a></h5>
+                    <% if(currentUser && event.author.id.equals(currentUser._id)){ %>
+                        <h5 class="d-flex flex-row justify-content-around">
+                            <div><a class="btn btn-xs btn-warning" href="/users/<%= currentUser._id %>/events/<%= event._id %>/edit">Edit</a></div>
+                            <form class="d-inline" action="/users/<%= currentUser._id %>/events/<%= event._id %>?_method=DELETE" method="post">
+                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                            </form>
+                        </h5>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+        <hr>
+    <% }); %>
+</div>
+
+<%- include("../partials/footer") %>

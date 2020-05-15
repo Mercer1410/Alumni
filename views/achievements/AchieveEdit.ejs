@@ -1,0 +1,22 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+    <h1 class="text-primary text-center">Update Achievement</h1>
+    <div class="row">
+        <div style="width: 30%; margin: 25px auto;">
+            <form action="/users/<%= user_id %>/achievements/<%= achieve._id %>?_method=PUT" method="post">
+                <div class="form-group">
+                    <input class="form-control" type="date" name="achieve[date]" value="<%= achieve.date ? achieve.date : '' %>">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="achieve[detail]" value="<%= achieve.detail ? achieve.detail : '' %>" placeholder="Add Details">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-block btn-outline-success" type="submit">Update Achievement</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer") %>

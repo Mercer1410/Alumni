@@ -1,0 +1,25 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+    <h1 class="text-primary text-center">Update <%= feed.title %></h1>
+    <div class="row">
+        <div style="width: 30%; margin: 25px auto;">
+            <form action="/<%= feed._id %>?_method=PUT" method="post">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="feed[title]" placeholder="What's on Your Mind??" value="<%= feed.title %>">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="feed[image]" placeholder="Image" value="<%= feed.image %>">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="feed[description]" placeholder="Description" value="<%= feed.description %>">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-block btn-outline-success" type="submit">Update Feed</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer") %>

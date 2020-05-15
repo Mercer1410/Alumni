@@ -1,0 +1,86 @@
+<%- include("../partials/header") %>
+
+<div class="row my-3">
+    <div class="col-lg-6">
+      <div class="d-flex flex-row justify-content-center">
+        <img src="<%= user.avatar %>" class="rounded-circle" style="height: 30vh;">
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="container">
+        <div class="jumbotron">
+          <h4><%= user.firstName %> <%= user.lastName %></h4>
+          <ul>
+            <li><%= user.occupation ? user.occupation : "Tell Us What You Currently Do??" %></li>
+            <% if(currentUser && user._id.equals(currentUser._id)){ %>
+              <li><a href="/users/<%= user._id %>/edit" class="btn btn-xs btn-outline-primary">Update Profile</a></li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+        <div class="col-lg-6">
+        <div class="container">
+            <div class="jumbotron">
+            <h4 class="text-center mb-5">Achievements</h4>
+            <% if(currentUser && user._id.equals(currentUser._id)){ %>
+              <a href="/users/<%= user._id %>/achievement/new" class="btn btn-xs btn-outline-warning">Add Achievement</a>
+            <% } %>
+            <ul>
+                <% user.achievement.forEach(function(ach){ %>
+                    <li><%= ach.detail %> - <%= ach.date %></li>
+                    <% if(currentUser && user._id.equals(currentUser._id)){ %>
+                      <a href="/users/user._id/achievements/<%= ach._id %>/edit" class="btn btn-outline-warning btn-xs">Edit</a>
+                      <form class="d-inline" action="/users/<%= user._id %>/achievements/<%= ach._id %>?_method=DELETE" method="post">
+                          <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                      </form>
+                    <% } %>
+                <% }); %>
+            </ul>
+            </div>
+        </div>
+        </div>
+        <div class="col-lg-6">
+        <div class="container">
+            <div class="jumbotron">
+            <h4 class="text-center mb-5">News and Update</h4 class="text-center mb-5">
+              <% if(currentUser && user._id.equals(currentUser._id)){ %>
+                <a href="/users/<%= user._id %>/news/new" class="btn btn-xs btn-outline-warning">Add an Update</a>
+              <% } %>
+            <ul>
+                <% user.news.forEach(function(news){ %>
+                  <li><%= news.detail %> on <%= news.date %></li>
+                  <% if(currentUser && user._id.equals(currentUser._id)){ %>
+                    <a href="/users/<%= user._id %>/news/<%= news._id %>/edit" class="btn btn-outline-warning btn-xs">Edit</a>
+                    <form class="d-inline" action="/users/<%= user._id %>/news/<%= news._id %>?_method=DELETE" method="post">
+                        <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                    </form>
+                  <% } %>
+                <% }); %>
+            </ul>
+            </div>
+        </div>
+        </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="container">
+        <div class="jumbotron">
+          <h4 class="text-center mb-5">TimeLine </h4>
+          <ul>
+            <% feed.reverse().forEach(function(feed){ %>
+                <li>
+                    <h5><%= feed.title %></h5>
+                    <p><%= feed.description %></p>
+                </li>
+            <% }); %>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<%- include("../partials/footer") %>
