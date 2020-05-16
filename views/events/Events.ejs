@@ -3,7 +3,7 @@
 <h1 class="display-1 text-center text-success">Events</h1>
 
 <div class="container">
-    <h4 class="text-right"><a href="/users/<%= currentUser._id %>/events/new" class="btn btn-xs btn-outline-success">Add Event</a></h4>
+    <h4 class="text-right"><a href="/users/<%= currentUser._id %>/events/new" class="btn btn-xs btn-outline-success"><i class="fas fa-plus-circle"></i></a></h4>
     <% events.forEach(function(event){ %>
         <div class="row mb-5">
             <div class="col-md-4">
@@ -25,9 +25,9 @@
                     <h5 class="text-right"><a class="btn btn-sm btn-outline-secondary" href="<%= event.Link ? event.Link : '#' %>">Learn more</a></h5>
                     <% if(currentUser && event.author.id.equals(currentUser._id)){ %>
                         <h5 class="d-flex flex-row justify-content-around">
-                            <div><a class="btn btn-xs btn-warning" href="/users/<%= currentUser._id %>/events/<%= event._id %>/edit">Edit</a></div>
+                            <div><a class="btn btn-xs btn-warning" href="/users/<%= currentUser._id %>/events/<%= event._id %>/edit"><i class="fas fa-edit"></i></a></div>
                             <form class="d-inline" action="/users/<%= currentUser._id %>/events/<%= event._id %>?_method=DELETE" method="post">
-                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                                <button type="submit" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button>
                             </form>
                         </h5>
                     <% } %>

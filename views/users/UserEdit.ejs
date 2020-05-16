@@ -6,25 +6,31 @@
         <div style="width: 30%; margin: 25px auto;">
             <form action="/users/<%= user._id %>?_method=PUT" method="post">
                 <div class="form-group">
+                    <h6 class="text-warning text-center">First Name</h6>
                     <input class="form-control" type="text" name="user[firstName]" placeholder="First Name" value="<%= user.firstName ? user.firstName : '' %>">
                 </div>
                 <div class="form-group">
+                    <h6 class="text-warning text-center">Last Name</h6>
                     <input class="form-control" type="text" name="user[lastName]" placeholder="Last Name" value="<%= user.lastName ? user.lastName : '' %>">
                 </div>
                 <div class="form-group">
+                    <h6 class="text-warning text-center">Avatar</h6>
                     <input class="form-control" type="text" name="user[avatar]" placeholder="Avatar" value="<%= user.avatar ? user.avatar : '' %>">
                 </div>
                 <div class="form-group">
+                    <h6 class="text-warning text-center">Place</h6>
                     <input class="form-control" type="text" name="user[place]" placeholder="Where are you From?" value="<%= user.place ? user.place : '' %>">
                 </div>
                 <div class="form-group">
+                    <h6 class="text-warning text-center">Email</h6>
                     <input class="form-control" type="email" name="user[email]" placeholder="Email" value="<%= user.email ? user.email : '' %>">
                 </div>
                 <div class="form-group">
+                    <h6 class="text-warning text-center">Occupation</h6>
                     <input class="form-control" type="text" name="user[occupation]" placeholder="Occupation" value="<%= user.occupation ? user.occupation : '' %>">
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-lg btn-block btn-outline-success" type="submit">Update Profile</button>
+                    <button class="btn btn-sm btn-block btn-outline-success" type="submit">Update Profile</button>
                 </div>
             </form>
         </div>

@@ -29,16 +29,16 @@
                         <h6 class="text-right"><%= moment(feed.createdAt).fromNow() %></h6>
                         <p class="card-text"><%= feed.description %></p>
                         <% if(currentUser && feed.author.id.equals(currentUser._id)){ %>
-                            <a href="/<%= feed._id %>/edit" class="btn btn-outline-warning btn-xs">Edit</a>
+                            <a href="/<%= feed._id %>/edit" class="btn btn-outline-warning btn-xs"><i class="fas fa-edit"></i></a>
                             <form class="d-inline" action="/<%= feed._id %>?_method=DELETE" method="post">
-                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                                <button type="submit" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button>
                             </form>
                         <% } %>
                     </div>
                     <div class="container">
                         <div class="jumbotron">
                             <div class="text-right">
-                                <a href="/<%= feed._id %>/comment/new" class="btn btn-sm btn-outline-secondary">Add a Comment</a>
+                                <a href="/<%= feed._id %>/comment/new" class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus-circle"></i></a>
                             </div>
                             <hr>
                         <% feed.comment.reverse().forEach(function(comment){ %>
@@ -46,9 +46,9 @@
                             <span class="text-right"><em><small><%= moment(comment.createdAt).fromNow() %></small></em></span>
                             <p><%= comment.text %></p>
                             <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
-                                <a href="/<%= feed._id %>/comment/<%= comment._id %>/edit" class="btn btn-outline-warning btn-xs">Edit</a>
+                                <a href="/<%= feed._id %>/comment/<%= comment._id %>/edit" class="btn btn-outline-warning btn-xs"><i class="fas fa-edit"></i></a>
                                 <form class="d-inline" action="/<%= feed._id %>/comment/<%= comment._id %>?_method=DELETE" method="post">
-                                    <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                                    <button type="submit" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button>
                                 </form>
                             <% } %>
                             <hr>
