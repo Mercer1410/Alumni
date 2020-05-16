@@ -12,7 +12,10 @@ var UserSchema = new mongoose.Schema({
     place: String,
     firstName: String,
     lastName: String,
-    email: String,
+    email: {type: String, unique: true, required: true},
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
+    isAdmin: {type: Boolean, default: false},
     occupation: String,
     achievement: [
         {
