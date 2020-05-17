@@ -3,16 +3,16 @@
 <div class="container">
     <div class="row">
         <div class="col-md-5 mb-5">
-            <div class="sticky-top">
+            <div class="sticky-top" data-aos="fade-right" data-aos-duration="1000">
                 <h3 class="text-danger text-center userTitle"><img class="rounded-circle" src="<%= currentUser.avatar %>" alt="" style="height: 6vh; width: 6vh;">  Welcome <%= currentUser.username %></h3>
-                <h4 class="text-warning mt-5 text-center">Know where your collegues are</h4>
+                <h4 class="Title">Know where your collegues are</h4>
                 <div id="map"></div>
-                <h3 class="text-center text-warning mt-1">Our Family</h3>
+                <h3 class="Title mt-2">Our Family</h3>
                 <div class="jumbotron">
-                    <div class="member">
+                    <div>
                         <% users.forEach(function(us){ %>
                             <ul>
-                                <li><a href="/users/<%= us._id %>"><%= us.firstName %> <%= us.lastName %></a></li>
+                                <li class="text-center"><h5><a class="text-warning" href="/users/<%= us._id %>"><%= us.firstName %> <%= us.lastName %></a></h5></li>
                             </ul>
                         <% }); %>
                     </div>
@@ -21,7 +21,7 @@
         </div>
         <div class="col-md-7">
             <% feed.reverse().forEach(function(feed){ %>
-                <div class="card">
+                <div class="card bg-dark" data-aos="fade-up" data-aos-duration="1000">
                     <img src="<%= feed.image %>" style="width: 100%; height: 60vh;" alt="Image">
                     <div class="card-body">
                         <h3 class="card-title text-primary"><%= feed.title %></h3>
@@ -29,7 +29,7 @@
                         <h6 class="text-right"><%= moment(feed.createdAt).fromNow() %></h6>
                         <p class="card-text"><%= feed.description %></p>
                         <% if(currentUser && feed.author.id.equals(currentUser._id)){ %>
-                            <a href="/<%= feed._id %>/edit" class="btn btn-outline-warning btn-xs"><i class="fas fa-edit"></i></a>
+                            <a href="/<%= feed._id %>/edit" class="btn btn-warning btn-xs"><i class="fas fa-edit"></i></a>
                             <form class="d-inline" action="/<%= feed._id %>?_method=DELETE" method="post">
                                 <button type="submit" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button>
                             </form>
@@ -37,16 +37,23 @@
                     </div>
                     <div class="container">
                         <div class="jumbotron">
-                            <div class="text-right">
-                                <a href="/<%= feed._id %>/comment/new" class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus-circle"></i></a>
+                            <div class="text-left">
+                                <form action="/<%= feed._id %>/comment" method="post">
+                                    <div class="form-group">
+                                        <label class=""><strong><%= currentUser.username %> :</strong></label>
+                                        <input class="form-control" type="text" name="comment[text]" placeholder="Add a Comment">
+                                        <div class="d-flex flex-row justify-content-end">
+                                            <button class="btn btn-sm btn-outline-success my-2 text-right" type="submit"><i class="fas fa-chevron-circle-right"></i></button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                            <hr>
                         <% feed.comment.reverse().forEach(function(comment){ %>
                             <strong><%= comment.author.username %></strong>
                             <span class="text-right"><em><small><%= moment(comment.createdAt).fromNow() %></small></em></span>
                             <p><%= comment.text %></p>
                             <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
-                                <a href="/<%= feed._id %>/comment/<%= comment._id %>/edit" class="btn btn-outline-warning btn-xs"><i class="fas fa-edit"></i></a>
+                                <a href="/<%= feed._id %>/comment/<%= comment._id %>/edit" class="btn btn-warning btn-xs"><i class="fas fa-edit"></i></a>
                                 <form class="d-inline" action="/<%= feed._id %>/comment/<%= comment._id %>?_method=DELETE" method="post">
                                     <button type="submit" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button>
                                 </form>

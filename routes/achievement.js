@@ -8,15 +8,6 @@ var middleware = require("../middleware");
 //=================
 //Achievement Routes
 //=================
-router.get("/users/:id/achievement/new", middleware.isLoggedIn, function(req,res){
-    User.findById(req.params.id, function(err, user){
-        if(err){
-            console.log(err);
-        }else{
-            res.render("achievements/AchieveNew", {user: user});
-        }
-    });
-});
 router.post("/users/:id/achievement", middleware.isLoggedIn, function(req,res){
     User.findById(req.params.id, function(err, user){
         if(err){

@@ -1,43 +1,43 @@
 <%- include("../partials/header") %>
 
 <div class="container">
-    <h1 class="text-primary text-center">Update <%= event.title %></h1>
+    <h1 class="Title" data-aos="zoom-in" data-aos-duration="2000">Update <%= event.title %></h1>
     <div class="row">
         <div style="width: 30%; margin: 25px auto;">
             <form action="/users/<%= user_id %>/events/<%= event._id %>?_method=PUT" method="post">
-                <div class="form-group">
+                <div class="form-group" data-aos="fade-right" data-aos-duration="2000">
                     <h6 class="text-warning text-center">Title</h6>
                     <input class="form-control" type="text" name="event[title]" value="<%= event.title ? event.title : '' %>" placeholder="What is the Event About?">
                 </div>
-                <div class="form-group">
+                <div class="form-group" data-aos="fade-left" data-aos-duration="2000">
                     <h6 class="text-warning text-center">Duration</h6>
                     <input class="form-control" type="text" name="event[duration]" value="<%= event.duration ? event.duration : '' %>" placeholder="How many days will the Event go on for?">
                 </div>
-                <div class="form-group">
+                <div class="form-group" data-aos="fade-right" data-aos-duration="2000">
                     <h6 class="text-warning text-center">Date</h6>
                     <input class="form-control" type="date" name="event[date]" value="<%= event.date ? event.date : '' %>" placeholder="When is the Event?">
                 </div>
-                <div class="form-group">
+                <div class="form-group" data-aos="fade-left" data-aos-duration="2000">
                     <h6 class="text-warning text-center">Details</h6>
                     <input class="form-control" type="text" name="event[description]" value="<%= event.description ? event.description : '' %>" placeholder="Tell us about the Event..">
                 </div>
-                <div class="form-group">
+                <div class="form-group" data-aos="fade-right" data-aos-duration="2000">
                     <h6 class="text-warning text-center">From</h6>
                     <input class="form-control" type="time" name="event[From]" value="<%= event.From ? event.From : '' %>">
                 </div>
-                <div class="form-group">
+                <div class="form-group" data-aos="fade-left" data-aos-duration="2000">
                     <h6 class="text-warning text-center">Till</h6>
                     <input class="form-control" type="time" name="event[Till]" value="<%= event.Till ? event.Till : '' %>">
                 </div>
-                <div class="form-group">
+                <div class="form-group" data-aos="fade-right" data-aos-duration="2000">
                     <h6 class="text-warning text-center">Link</h6>
                     <input class="form-control" type="url" name="event[Link]" value="<%= event.Link ? event.Link : '' %>" placeholder="Link to the Event">
                 </div>
-                <div class="form-group">
+                <div class="form-group" data-aos="fade-left" data-aos-duration="2000">
                     <h6 class="text-warning text-center">Poster</h6>
                     <input class="form-control" type="text" name="event[Poster]" value="<%= event.Poster ? event.Poster : '' %>" placeholder="Poster for Event">
                 </div>
-                <div class="form-group">
+                <div class="form-group" data-aos="zoom-in" data-aos-duration="2000">
                     <button class="btn btn-md btn-block btn-outline-success" type="submit">Update Event</button>
                 </div>
             </form>

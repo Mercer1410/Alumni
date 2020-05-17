@@ -53,12 +53,13 @@
                     <% }else{ %>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-danger" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<%= currentUser.avatar %>" width="40px" height="40px" class="rounded-circle" alt=" "> <%= currentUser.username %></a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/feeds">Feeds</a>
-                                <a class="dropdown-item" href="/feeds/new">New Feed</a>
-                                <a class="dropdown-item" href="/users/<%= currentUser._id %>/events">Events</a>
+                            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item bg-dark text-light" href="/users/<%= currentUser._id %>">My Profile</a>
+                                <a class="dropdown-item bg-dark text-light" href="/feeds">Feeds</a>
+                                <a class="dropdown-item bg-dark text-light" href="/feeds/new">New Feed</a>
+                                <a class="dropdown-item bg-dark text-light" href="/users/<%= currentUser._id %>/events">Events</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/logout">Log Out</a>
+                                <a class="dropdown-item bg-dark text-light" href="/logout">Log Out</a>
                             </div>
                         </li>
                     <% } %>

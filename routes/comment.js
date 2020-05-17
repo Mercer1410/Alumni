@@ -8,15 +8,6 @@ var middleware = require("../middleware");
 //=======================
 //Comment Routes
 //=======================
-router.get("/:id/comment/new", middleware.isLoggedIn, function(req,res){
-    Feed.findById(req.params.id, function(err, feed){
-        if(err){
-            console.log(err);
-        }else{
-            res.render("comments/commentNew", {feed: feed});
-        }
-    });
-});
 router.post("/:id/comment", middleware.isLoggedIn, function(req,res){
     Feed.findById(req.params.id, function(err, feed){
         if(err){

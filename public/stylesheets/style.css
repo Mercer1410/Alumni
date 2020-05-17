@@ -2,6 +2,7 @@ body{
     background: #C33764;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #1D2671, #C33764);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #1D2671, #C33764); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: deepskyblue;
 }
 .section{
     text-align: center;
@@ -28,12 +29,41 @@ body{
     border-top: 1px solid goldenrod;
     border-bottom: 1px solid goldenrod;
 }
-.commentButton{
-    text-decoration: none;
-    background-color: gray;
-}
 
 ul
 {
 	list-style: none;
+}
+.jumbotron{
+    background: rgba(0, 175, 255, 0.3);
+}
+.form-control{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid red;
+    color: white;
+}
+
+input:focus{
+    border: 1px solid blue;
+    transition: 1s;
+    color: black;
+}
+
+input{
+    color: white;
+}
+::placeholder{
+    text-align: center;
+    color: lightgray !important;
+}
+
+.Title{
+    text-align: center;
+    color: turquoise;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 1%;
+}
+.form-group button{
+    margin-bottom:20%;
 }

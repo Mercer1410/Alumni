@@ -1,19 +1,19 @@
 <%- include("../partials/header") %>
 
 <div class="container">
-    <h1 class="text-primary text-center">Update News</h1>
+    <h1 class="Title" data-aos="zoom-in" data-aos-duration="1000">Update News</h1>
     <div class="row">
         <div style="width: 30%; margin: 25px auto;">
             <form action="/users/<%= user_id %>/news/<%= news._id %>?_method=PUT" method="post">
-                <div class="form-group">
+                <div class="form-group" data-aos="fade-right" data-aos-duration="2000">
                     <h6 class="text-warning text-center">Date</h6>
                     <input class="form-control" type="date" name="news[date]" value="<%= news.date ? news.date : '' %>">
                 </div>
-                <div class="form-group">
+                <div class="form-group" data-aos="fade-left" data-aos-duration="2000">
                     <h6 class="text-warning text-center">Details</h6>
                     <input class="form-control" type="text" name="news[detail]" value="<%= news.detail ? news.detail : '' %>" placeholder="Add Details">
                 </div>
-                <div class="form-group">
+                <div class="form-group" data-aos="zoom-in" data-aos-duration="2000">
                     <button class="btn btn-md btn-block btn-outline-success" type="submit">Update News</button>
                 </div>
             </form>
