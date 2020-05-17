@@ -8,15 +8,6 @@ var middleware = require("../middleware");
 //=================
 //News Routes
 //=================
-router.get("/users/:id/news/new", middleware.isLoggedIn, function(req,res){
-    User.findById(req.params.id, function(err, user){
-        if(err){
-            console.log(err);
-        }else{
-            res.render("news/NewsNew", {user: user});
-        }
-    });
-});
 router.post("/users/:id/news", middleware.isLoggedIn, function(req,res){
     User.findById(req.params.id, function(err, user){
         if(err){
