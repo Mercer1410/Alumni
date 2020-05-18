@@ -9,7 +9,9 @@ body{
     padding-top: 40vh;
   }
   #landing-header h1 {
-    color: darkorchid;
+    color: crimson;
+    background-color: rgba(255, 215, 0, 0.5);
+    padding: 2%;
   }
   .slideshow { 
     position: fixed;

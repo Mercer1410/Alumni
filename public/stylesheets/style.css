@@ -72,3 +72,17 @@ input{
 .form-group button{
     margin-bottom:20%;
 }
+.nav-link:hover{
+    background-color: rgb(10, 219, 219);
+    border-bottom: 2px solid yellow;
+    color: blue !important;
+    transition: 500ms;
+}
+.nav-link{
+    font-size: large;
+    font-weight: 600;
+}
+.highlight{
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 5%;
+}
